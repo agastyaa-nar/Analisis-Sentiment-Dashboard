@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import WordCloud from "./pages/WordCloud";
 import Insights from "./pages/Insights";
+import Predict from "./pages/Predict";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/wordcloud" element={<WordCloud />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/predict" element={<Predict />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

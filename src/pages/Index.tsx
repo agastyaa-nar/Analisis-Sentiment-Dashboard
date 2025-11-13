@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
-import { ArrowRight, BarChart3, MessageSquare, TrendingUp, FileText, Star, Users } from "lucide-react";
+import { ArrowRight, BarChart3, MessageSquare, TrendingUp, FileText, Star, Users, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   const features = [
+    {
+      icon: Sparkles,
+      title: "Prediksi Sentimen AI",
+      description: "Prediksi sentimen real-time menggunakan AI untuk ulasan baru. Input teks dan dapatkan hasil instan.",
+    },
     {
       icon: TrendingUp,
       title: "Dashboard Sentimen",
@@ -20,11 +25,6 @@ const Index = () => {
       icon: FileText,
       title: "Insights & Rekomendasi",
       description: "Temukan masalah utama dan dapatkan rekomendasi berbasis data untuk perbaikan aplikasi.",
-    },
-    {
-      icon: Star,
-      title: "Analisis Rating",
-      description: "Pahami distribusi rating pengguna dan korelasi dengan sentimen ulasan.",
     },
   ];
 
