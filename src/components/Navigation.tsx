@@ -1,5 +1,5 @@
 import { NavLink } from "./NavLink";
-import { BarChart3, Home, MessageSquare, TrendingUp, FileText } from "lucide-react";
+import { BarChart3, Home, MessageSquare, TrendingUp, FileText, Sparkles } from "lucide-react";
 
 export const Navigation = () => {
   return (
@@ -45,6 +45,14 @@ export const Navigation = () => {
             >
               <FileText className="w-4 h-4 inline mr-2" />
               Insights
+            </NavLink>
+            <NavLink
+              to="/predict"
+              className="px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
+              activeClassName="bg-gradient-warm text-white shadow-soft"
+            >
+              <Sparkles className="w-4 h-4 inline mr-2" />
+              Prediksi
             </NavLink>
           </div>
         </div>
