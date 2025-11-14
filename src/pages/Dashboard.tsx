@@ -26,64 +26,78 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gradient-hero">
       <Navigation />
       
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard Analisis Sentimen</h1>
-          <p className="text-muted-foreground">Ringkasan persepsi publik terhadap aplikasi SIREKAP</p>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8 animate-slide-up">
+          <h1 className="text-4xl font-bold text-foreground mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Dashboard Analisis Sentimen
+          </h1>
+          <p className="text-muted-foreground text-lg">Ringkasan persepsi publik terhadap aplikasi SIREKAP</p>
         </div>
 
         {/* Sentiment Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="p-6 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-300 bg-card">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">Total Ulasan</span>
-              <div className="w-10 h-10 rounded-2xl bg-gradient-warm flex items-center justify-center">
-                <Star className="w-5 h-5 text-white" />
+          <Card className="p-7 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-500 bg-card hover:scale-105 animate-slide-up group overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-warm opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Ulasan</span>
+                <div className="w-12 h-12 rounded-2xl bg-gradient-warm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Star className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold text-foreground mb-2 tracking-tight">
+                {sentimentData.total.toLocaleString()}
+              </div>
+              <p className="text-sm text-muted-foreground">Ulasan dianalisis</p>
             </div>
-            <div className="text-3xl font-bold text-foreground mb-1">
-              {sentimentData.total.toLocaleString()}
-            </div>
-            <p className="text-xs text-muted-foreground">Ulasan dianalisis</p>
           </Card>
 
-          <Card className="p-6 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-300 bg-card">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">Positif</span>
-              <div className="w-10 h-10 rounded-2xl bg-gradient-sage flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-white" />
+          <Card className="p-7 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-500 bg-card hover:scale-105 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.1s" }}>
+            <div className="absolute inset-0 bg-gradient-sage opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Positif</span>
+                <div className="w-12 h-12 rounded-2xl bg-gradient-sage flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold bg-gradient-sage bg-clip-text text-transparent mb-2 tracking-tight">
+                {positivePercent}%
+              </div>
+              <p className="text-sm text-muted-foreground">{sentimentData.positive.toLocaleString()} ulasan</p>
             </div>
-            <div className="text-3xl font-bold text-foreground mb-1">
-              {positivePercent}%
-            </div>
-            <p className="text-xs text-muted-foreground">{sentimentData.positive.toLocaleString()} ulasan</p>
           </Card>
 
-          <Card className="p-6 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-300 bg-card">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">Netral</span>
-              <div className="w-10 h-10 rounded-2xl bg-muted flex items-center justify-center">
-                <Minus className="w-5 h-5 text-foreground" />
+          <Card className="p-7 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-500 bg-card hover:scale-105 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.2s" }}>
+            <div className="absolute inset-0 bg-muted opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Netral</span>
+                <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Minus className="w-6 h-6 text-foreground" />
+                </div>
               </div>
+              <div className="text-4xl font-bold text-muted-foreground mb-2 tracking-tight">
+                {neutralPercent}%
+              </div>
+              <p className="text-sm text-muted-foreground">{sentimentData.neutral.toLocaleString()} ulasan</p>
             </div>
-            <div className="text-3xl font-bold text-foreground mb-1">
-              {neutralPercent}%
-            </div>
-            <p className="text-xs text-muted-foreground">{sentimentData.neutral.toLocaleString()} ulasan</p>
           </Card>
 
-          <Card className="p-6 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-300 bg-card">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">Negatif</span>
-              <div className="w-10 h-10 rounded-2xl bg-gradient-radial from-destructive/80 to-destructive flex items-center justify-center">
-                <TrendingDown className="w-5 h-5 text-white" />
+          <Card className="p-7 rounded-3xl border-none shadow-soft hover:shadow-glow transition-all duration-500 bg-card hover:scale-105 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.3s" }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-destructive/20 to-destructive/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Negatif</span>
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-destructive to-destructive/80 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <TrendingDown className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold text-destructive mb-2 tracking-tight">
+                {negativePercent}%
+              </div>
+              <p className="text-sm text-muted-foreground">{sentimentData.negative.toLocaleString()} ulasan</p>
             </div>
-            <div className="text-3xl font-bold text-foreground mb-1">
-              {negativePercent}%
-            </div>
-            <p className="text-xs text-muted-foreground">{sentimentData.negative.toLocaleString()} ulasan</p>
           </Card>
         </div>
 

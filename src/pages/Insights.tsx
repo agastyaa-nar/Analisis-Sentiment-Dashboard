@@ -46,58 +46,61 @@ const Insights = () => {
     <div className="min-h-screen bg-gradient-hero">
       <Navigation />
       
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Insights & Rekomendasi</h1>
-          <p className="text-muted-foreground">Analisis mendalam masalah utama dan rekomendasi perbaikan</p>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8 animate-slide-up">
+          <h1 className="text-4xl font-bold text-foreground mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Insights & Rekomendasi
+          </h1>
+          <p className="text-muted-foreground text-lg">Analisis mendalam masalah utama dan rekomendasi perbaikan</p>
         </div>
 
         {/* Summary Alert */}
-        <Card className="p-6 rounded-3xl border-none shadow-soft bg-gradient-to-br from-destructive/10 to-transparent mb-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-destructive/20 flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-destructive" />
+        <Card className="p-8 rounded-3xl border-none shadow-soft bg-gradient-to-br from-destructive/10 to-transparent mb-8 animate-slide-up hover:shadow-glow transition-all duration-500 border-l-4 border-l-destructive">
+          <div className="flex items-start gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-destructive to-destructive/80 flex items-center justify-center flex-shrink-0 shadow-lg">
+              <AlertCircle className="w-7 h-7 text-white" />
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Perhatian Khusus Diperlukan</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Berdasarkan analisis 8.400 ulasan negatif, ditemukan 5 masalah kritis yang memerlukan penanganan segera. 
-                Masalah login mendominasi dengan 38.6% dari total keluhan negatif.
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-foreground mb-3">Perhatian Khusus Diperlukan</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Berdasarkan analisis <span className="font-semibold text-destructive">8.400 ulasan negatif</span>, ditemukan 5 masalah kritis yang memerlukan penanganan segera. 
+                Masalah login mendominasi dengan <span className="font-semibold text-destructive">38.6%</span> dari total keluhan negatif.
               </p>
             </div>
           </div>
         </Card>
 
         {/* Top Issues */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Top 5 Masalah Terbanyak</h2>
-          <div className="space-y-4">
+        <div className="mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <h2 className="text-3xl font-bold text-foreground mb-6">Top 5 Masalah Terbanyak</h2>
+          <div className="space-y-5">
             {topIssues.map((issue, index) => {
               const Icon = issue.icon;
               return (
                 <Card 
                   key={index}
-                  className="p-6 rounded-3xl border-none shadow-soft bg-card hover:shadow-glow transition-all duration-300"
+                  className="p-7 rounded-3xl border-none shadow-soft bg-card hover:shadow-glow transition-all duration-500 hover:scale-[1.02] group"
+                  style={{ animationDelay: `${0.2 + index * 0.1}s` }}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-warm flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-6 h-6 text-white" />
+                    <div className="flex items-center gap-5 flex-1">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-destructive to-destructive/80 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <Badge className="bg-muted text-foreground border-none px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-3 mb-3">
+                          <Badge className="bg-gradient-warm text-white border-none px-4 py-1.5 rounded-full shadow-md font-semibold">
                             #{index + 1}
                           </Badge>
-                          <h3 className="text-lg font-semibold text-foreground">{issue.title}</h3>
+                          <h3 className="text-xl font-bold text-foreground">{issue.title}</h3>
                         </div>
                         <div className="flex items-center gap-4">
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-sm font-medium text-muted-foreground">
                             {issue.count.toLocaleString()} keluhan
                           </span>
                           <div className="flex-1 max-w-md">
-                            <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                              <div 
+                            <div className="w-full h-3 bg-muted rounded-full overflow-hidden shadow-inner">
+                              <div
                                 className="h-full bg-gradient-to-r from-destructive/80 to-destructive rounded-full transition-all duration-500"
                                 style={{ width: `${issue.percentage}%` }}
                               />
