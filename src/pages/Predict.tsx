@@ -4,9 +4,10 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Sparkles, TrendingUp, TrendingDown, Minus, AlertCircle } from "lucide-react";
+import { Loader2, Sparkles, TrendingUp, TrendingDown, Minus, AlertCircle, BarChart3 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 interface PredictionResult {
   sentiment: 'Positif' | 'Netral' | 'Negatif';
@@ -185,61 +186,134 @@ const Predict = () => {
 
           {/* Result Section */}
           {result && (
-            <Card className="p-8 rounded-3xl border-none shadow-soft bg-card animate-slide-up">
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Hasil Prediksi</h3>
-                  
-                  <div className={`inline-flex items-center gap-3 px-8 py-4 rounded-3xl ${getSentimentColor(result.sentiment)} shadow-soft mb-4`}>
-                    {getSentimentIcon(result.sentiment)}
-                    <span className="text-2xl font-bold">{result.sentiment}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <span className="text-sm text-muted-foreground">Confidence Score:</span>
-                    <Badge className="px-4 py-1 text-base font-semibold bg-gradient-warm text-white border-none rounded-full">
-                      {result.confidence}%
-                    </Badge>
+            <div className="space-y-6 animate-slide-up">
+              {/* Main Result Card */}
+              <Card className="p-8 rounded-3xl border-none shadow-soft bg-card">
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <h3 className="text-xl font-semibold text-foreground mb-4">Hasil Prediksi</h3>
+                    
+                    <div className={`inline-flex items-center gap-3 px-8 py-4 rounded-3xl ${getSentimentColor(result.sentiment)} shadow-soft mb-4`}>
+                      {getSentimentIcon(result.sentiment)}
+                      <span className="text-2xl font-bold">{result.sentiment}</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-center gap-2 mb-4">
+                      <span className="text-sm text-muted-foreground">Confidence Score:</span>
+                      <Badge className="px-4 py-1 text-base font-semibold bg-gradient-warm text-white border-none rounded-full">
+                        {result.confidence}%
+                      </Badge>
+                    </div>
+
+                    {/* Confidence Bar */}
+                    <div className="max-w-md mx-auto">
+                      <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-warm rounded-full transition-all duration-500"
+                          style={{ width: `${result.confidence}%` }}
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Confidence Bar */}
-                  <div className="max-w-md mx-auto">
-                    <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-warm rounded-full transition-all duration-500"
-                        style={{ width: `${result.confidence}%` }}
-                      />
+                  <div className={`p-6 bg-gradient-to-br ${getSentimentBgColor(result.sentiment)} rounded-2xl`}>
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2">Alasan Prediksi</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{result.reason}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </Card>
 
-                <div className={`p-6 bg-gradient-to-br ${getSentimentBgColor(result.sentiment)} rounded-2xl`}>
-                  <div className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Alasan Prediksi</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{result.reason}</p>
-                    </div>
+              {/* Visualization Grid */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Sentiment Distribution Chart */}
+                <Card className="p-6 rounded-3xl border-none shadow-soft bg-card">
+                  <div className="flex items-center gap-2 mb-4">
+                    <BarChart3 className="w-5 h-5 text-primary" />
+                    <h4 className="font-semibold text-foreground">Distribusi Confidence</h4>
                   </div>
-                </div>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <PieChart>
+                      <Pie
+                        data={[
+                          { name: result.sentiment, value: result.confidence },
+                          { name: 'Uncertainty', value: 100 - result.confidence }
+                        ]}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        <Cell fill="hsl(var(--primary))" />
+                        <Cell fill="hsl(var(--muted))" />
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Card>
 
+                {/* Word Cloud */}
                 {result.keywords && result.keywords.length > 0 && (
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-3">Kata Kunci Terdeteksi</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {result.keywords.map((keyword, idx) => (
-                        <Badge
-                          key={idx}
-                          className="px-4 py-2 bg-muted text-foreground border-none rounded-full hover:bg-muted/80 transition-colors"
-                        >
-                          {keyword}
-                        </Badge>
-                      ))}
+                  <Card className="p-6 rounded-3xl border-none shadow-soft bg-card">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Sparkles className="w-5 h-5 text-primary" />
+                      <h4 className="font-semibold text-foreground">Kata Kunci Terdeteksi</h4>
                     </div>
-                  </div>
+                    <div className="flex flex-wrap gap-3 justify-center items-center min-h-[200px]">
+                      {result.keywords.map((keyword, idx) => {
+                        const sizes = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm'];
+                        const size = sizes[idx % sizes.length];
+                        const opacity = 1 - (idx * 0.15);
+                        return (
+                          <Badge
+                            key={idx}
+                            className={`${size} px-4 py-2 bg-gradient-warm text-white border-none rounded-full hover:scale-110 transition-transform cursor-default shadow-soft`}
+                            style={{ opacity: Math.max(opacity, 0.4) }}
+                          >
+                            {keyword}
+                          </Badge>
+                        );
+                      })}
+                    </div>
+                  </Card>
                 )}
               </div>
-            </Card>
+
+              {/* Sentiment Categories Info */}
+              <Card className="p-6 rounded-3xl border-none shadow-soft bg-card">
+                <h4 className="font-semibold text-foreground mb-4">Kategori Sentimen</h4>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-sage-50 to-transparent">
+                    <div className="flex items-center gap-2 mb-2">
+                      <TrendingUp className="w-5 h-5 text-sage-600" />
+                      <span className="font-semibold text-foreground">Positif</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Ulasan yang menunjukkan kepuasan dan pengalaman baik</p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-muted to-transparent">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Minus className="w-5 h-5 text-muted-foreground" />
+                      <span className="font-semibold text-foreground">Netral</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Ulasan informatif tanpa sentimen jelas</p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-destructive/10 to-transparent">
+                    <div className="flex items-center gap-2 mb-2">
+                      <TrendingDown className="w-5 h-5 text-destructive" />
+                      <span className="font-semibold text-foreground">Negatif</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Ulasan yang menunjukkan keluhan dan ketidakpuasan</p>
+                  </div>
+                </div>
+              </Card>
+            </div>
           )}
 
           {/* Info Card */}
