@@ -3,14 +3,27 @@ import { Navigation } from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
 
 const WordCloud = () => {
-  // Generate random position and rotation for each word
-  const getRandomPosition = () => ({
-    top: `${Math.random() * 70 + 10}%`,
-    left: `${Math.random() * 70 + 10}%`,
-    rotate: `${Math.random() * 40 - 20}deg`
-  });
+  // Generate better distributed positions for words
+  const getWordPositions = (wordCount: number) => {
+    const positions = [];
+    const cols = 8;
+    const rows = Math.ceil(wordCount / cols);
+    
+    for (let i = 0; i < wordCount; i++) {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      
+      positions.push({
+        top: `${(row / rows) * 85 + Math.random() * 8 + 5}%`,
+        left: `${(col / cols) * 85 + Math.random() * 8 + 5}%`,
+        rotate: `${Math.random() * 30 - 15}deg`
+      });
+    }
+    
+    return positions;
+  };
 
-  const positiveWords = [
+  const positiveWordsData = [
     { text: "bagus", size: "text-5xl", weight: 900, color: "hsl(142, 76%, 36%)" },
     { text: "mantap", size: "text-4xl", weight: 800, color: "hsl(142, 70%, 45%)" },
     { text: "bantu", size: "text-3xl", weight: 700, color: "hsl(142, 65%, 50%)" },
@@ -26,9 +39,11 @@ const WordCloud = () => {
     { text: "oke", size: "text-xl", weight: 500, color: "hsl(142, 55%, 60%)" },
     { text: "recommended", size: "text-3xl", weight: 700, color: "hsl(142, 69%, 47%)" },
     { text: "user-friendly", size: "text-2xl", weight: 600, color: "hsl(142, 64%, 49%)" },
-  ].map(word => ({ ...word, position: getRandomPosition() }));
+  ];
+  const positivePositions = getWordPositions(positiveWordsData.length);
+  const positiveWords = positiveWordsData.map((word, i) => ({ ...word, position: positivePositions[i] }));
 
-  const neutralWords = [
+  const neutralWordsData = [
     { text: "login", size: "text-4xl", weight: 800, color: "hsl(215, 16%, 47%)" },
     { text: "versi", size: "text-3xl", weight: 700, color: "hsl(215, 18%, 52%)" },
     { text: "update", size: "text-4xl", weight: 800, color: "hsl(215, 15%, 44%)" },
@@ -41,9 +56,11 @@ const WordCloud = () => {
     { text: "notifikasi", size: "text-xl", weight: 500, color: "hsl(215, 19%, 57%)" },
     { text: "menu", size: "text-xl", weight: 500, color: "hsl(215, 21%, 59%)" },
     { text: "pengaturan", size: "text-2xl", weight: 600, color: "hsl(215, 16%, 51%)" },
-  ].map(word => ({ ...word, position: getRandomPosition() }));
+  ];
+  const neutralPositions = getWordPositions(neutralWordsData.length);
+  const neutralWords = neutralWordsData.map((word, i) => ({ ...word, position: neutralPositions[i] }));
 
-  const negativeWords = [
+  const negativeWordsData = [
     { text: "error", size: "text-6xl", weight: 900, color: "hsl(0, 84%, 60%)" },
     { text: "gagal", size: "text-5xl", weight: 900, color: "hsl(0, 80%, 55%)" },
     { text: "susah", size: "text-4xl", weight: 800, color: "hsl(0, 76%, 50%)" },
@@ -58,7 +75,9 @@ const WordCloud = () => {
     { text: "boros baterai", size: "text-xl", weight: 500, color: "hsl(0, 65%, 42%)" },
     { text: "hang", size: "text-2xl", weight: 600, color: "hsl(0, 71%, 47%)" },
     { text: "jelek", size: "text-xl", weight: 500, color: "hsl(0, 66%, 43%)" },
-  ].map(word => ({ ...word, position: getRandomPosition() }));
+  ];
+  const negativePositions = getWordPositions(negativeWordsData.length);
+  const negativeWords = negativeWordsData.map((word, i) => ({ ...word, position: negativePositions[i] }));
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -72,9 +91,9 @@ const WordCloud = () => {
           <p className="text-muted-foreground text-lg">Visualisasi kata-kata dominan dalam setiap kategori sentimen</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="space-y-8">
           {/* Positive Word Cloud */}
-          <Card className="p-8 rounded-3xl border-none shadow-elegant bg-gradient-to-br from-card via-card to-sage-50/20 dark:to-sage-50/5 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative">
+          <Card className="w-full p-8 rounded-3xl border-none shadow-soft bg-gradient-to-br from-card via-card to-sage-50/20 dark:to-sage-50/5 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-sage opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-sage-100/30 dark:bg-sage-100/5 rounded-full blur-3xl" />
             <div className="relative">
@@ -87,7 +106,7 @@ const WordCloud = () => {
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">2.840 ulasan</span>
               </div>
-              <div className="relative min-h-[500px] w-full p-8 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-sage-100/50 dark:border-sage-100/10 backdrop-blur-sm overflow-hidden">
+              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-sage-100/50 dark:border-sage-100/10 backdrop-blur-sm overflow-hidden">
                 {positiveWords.map((word, index) => (
                   <span
                     key={index}
@@ -110,7 +129,7 @@ const WordCloud = () => {
           </Card>
 
           {/* Neutral Word Cloud */}
-          <Card className="p-8 rounded-3xl border-none shadow-elegant bg-gradient-to-br from-card via-card to-muted/30 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.1s" }}>
+          <Card className="w-full p-8 rounded-3xl border-none shadow-soft bg-gradient-to-br from-card via-card to-muted/30 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.1s" }}>
             <div className="absolute inset-0 bg-muted opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-muted/30 rounded-full blur-3xl" />
             <div className="relative">
@@ -123,7 +142,7 @@ const WordCloud = () => {
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">4.180 ulasan</span>
               </div>
-              <div className="relative min-h-[500px] w-full p-8 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-muted/50 backdrop-blur-sm overflow-hidden">
+              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-muted/50 backdrop-blur-sm overflow-hidden">
                 {neutralWords.map((word, index) => (
                   <span
                     key={index}
@@ -146,7 +165,7 @@ const WordCloud = () => {
           </Card>
 
           {/* Negative Word Cloud */}
-          <Card className="p-8 rounded-3xl border-none shadow-elegant bg-gradient-to-br from-card via-card to-destructive/10 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.2s" }}>
+          <Card className="w-full p-8 rounded-3xl border-none shadow-soft bg-gradient-to-br from-card via-card to-destructive/10 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.2s" }}>
             <div className="absolute inset-0 bg-destructive/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-destructive/20 rounded-full blur-3xl" />
             <div className="relative">
@@ -159,7 +178,7 @@ const WordCloud = () => {
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">1.460 ulasan</span>
               </div>
-              <div className="relative min-h-[500px] w-full p-8 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-destructive/20 backdrop-blur-sm overflow-hidden">
+              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-destructive/20 backdrop-blur-sm overflow-hidden">
                 {negativeWords.map((word, index) => (
                   <span
                     key={index}
