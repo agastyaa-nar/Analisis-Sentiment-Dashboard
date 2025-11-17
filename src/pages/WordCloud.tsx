@@ -1,83 +1,126 @@
 import { Card } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
+import ReactWordcloud from "react-wordcloud";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/scale.css";
 
 const WordCloud = () => {
-  // Generate better distributed positions for words
-  const getWordPositions = (wordCount: number) => {
-    const positions = [];
-    const cols = 8;
-    const rows = Math.ceil(wordCount / cols);
-    
-    for (let i = 0; i < wordCount; i++) {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      
-      positions.push({
-        top: `${(row / rows) * 85 + Math.random() * 8 + 5}%`,
-        left: `${(col / cols) * 85 + Math.random() * 8 + 5}%`,
-        rotate: `${Math.random() * 30 - 15}deg`
-      });
-    }
-    
-    return positions;
+  const positiveWords = [
+    { text: "bagus", value: 900 },
+    { text: "mantap", value: 800 },
+    { text: "bantu", value: 700 },
+    { text: "mudah", value: 800 },
+    { text: "praktis", value: 700 },
+    { text: "cepat", value: 600 },
+    { text: "efisien", value: 700 },
+    { text: "memuaskan", value: 800 },
+    { text: "responsif", value: 600 },
+    { text: "terbaik", value: 700 },
+    { text: "simpel", value: 500 },
+    { text: "lancar", value: 600 },
+    { text: "oke", value: 500 },
+    { text: "recommended", value: 700 },
+    { text: "user-friendly", value: 600 },
+  ];
+
+  const neutralWords = [
+    { text: "login", value: 800 },
+    { text: "versi", value: 700 },
+    { text: "update", value: 800 },
+    { text: "aplikasi", value: 700 },
+    { text: "data", value: 600 },
+    { text: "sistem", value: 700 },
+    { text: "fitur", value: 600 },
+    { text: "interface", value: 500 },
+    { text: "tampilan", value: 600 },
+    { text: "notifikasi", value: 500 },
+    { text: "menu", value: 500 },
+    { text: "pengaturan", value: 600 },
+  ];
+
+  const negativeWords = [
+    { text: "error", value: 900 },
+    { text: "gagal", value: 900 },
+    { text: "susah", value: 800 },
+    { text: "tidak bisa login", value: 900 },
+    { text: "lambat", value: 800 },
+    { text: "crash", value: 700 },
+    { text: "bug", value: 800 },
+    { text: "lemot", value: 700 },
+    { text: "ribet", value: 600 },
+    { text: "force close", value: 700 },
+    { text: "loading", value: 600 },
+    { text: "boros baterai", value: 500 },
+    { text: "hang", value: 600 },
+    { text: "jelek", value: 500 },
+  ];
+
+  const positiveOptions = {
+    rotations: 2,
+    rotationAngles: [-15, 0] as [number, number],
+    fontSizes: [20, 80] as [number, number],
+    colors: [
+      "hsl(142, 76%, 36%)",
+      "hsl(142, 70%, 45%)",
+      "hsl(142, 72%, 40%)",
+      "hsl(142, 68%, 48%)",
+      "hsl(142, 75%, 42%)",
+      "hsl(142, 73%, 38%)",
+    ],
+    enableTooltip: true,
+    deterministic: false,
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontWeight: "bold",
+    padding: 2,
+    scale: "sqrt" as const,
+    spiral: "archimedean" as const,
+    transitionDuration: 1000,
   };
 
-  const positiveWordsData = [
-    { text: "bagus", size: "text-5xl", weight: 900, color: "hsl(142, 76%, 36%)" },
-    { text: "mantap", size: "text-4xl", weight: 800, color: "hsl(142, 70%, 45%)" },
-    { text: "bantu", size: "text-3xl", weight: 700, color: "hsl(142, 65%, 50%)" },
-    { text: "mudah", size: "text-4xl", weight: 800, color: "hsl(142, 72%, 40%)" },
-    { text: "praktis", size: "text-3xl", weight: 700, color: "hsl(142, 68%, 48%)" },
-    { text: "cepat", size: "text-2xl", weight: 600, color: "hsl(142, 60%, 55%)" },
-    { text: "efisien", size: "text-3xl", weight: 700, color: "hsl(142, 75%, 42%)" },
-    { text: "memuaskan", size: "text-4xl", weight: 800, color: "hsl(142, 73%, 38%)" },
-    { text: "responsif", size: "text-2xl", weight: 600, color: "hsl(142, 62%, 52%)" },
-    { text: "terbaik", size: "text-3xl", weight: 700, color: "hsl(142, 71%, 44%)" },
-    { text: "simpel", size: "text-xl", weight: 500, color: "hsl(142, 58%, 58%)" },
-    { text: "lancar", size: "text-2xl", weight: 600, color: "hsl(142, 66%, 46%)" },
-    { text: "oke", size: "text-xl", weight: 500, color: "hsl(142, 55%, 60%)" },
-    { text: "recommended", size: "text-3xl", weight: 700, color: "hsl(142, 69%, 47%)" },
-    { text: "user-friendly", size: "text-2xl", weight: 600, color: "hsl(142, 64%, 49%)" },
-  ];
-  const positivePositions = getWordPositions(positiveWordsData.length);
-  const positiveWords = positiveWordsData.map((word, i) => ({ ...word, position: positivePositions[i] }));
+  const neutralOptions = {
+    rotations: 2,
+    rotationAngles: [-15, 0] as [number, number],
+    fontSizes: [20, 80] as [number, number],
+    colors: [
+      "hsl(215, 16%, 47%)",
+      "hsl(215, 18%, 52%)",
+      "hsl(215, 15%, 44%)",
+      "hsl(215, 17%, 49%)",
+      "hsl(215, 19%, 55%)",
+      "hsl(215, 16%, 50%)",
+    ],
+    enableTooltip: true,
+    deterministic: false,
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontWeight: "bold",
+    padding: 2,
+    scale: "sqrt" as const,
+    spiral: "archimedean" as const,
+    transitionDuration: 1000,
+  };
 
-  const neutralWordsData = [
-    { text: "login", size: "text-4xl", weight: 800, color: "hsl(215, 16%, 47%)" },
-    { text: "versi", size: "text-3xl", weight: 700, color: "hsl(215, 18%, 52%)" },
-    { text: "update", size: "text-4xl", weight: 800, color: "hsl(215, 15%, 44%)" },
-    { text: "aplikasi", size: "text-3xl", weight: 700, color: "hsl(215, 17%, 49%)" },
-    { text: "data", size: "text-2xl", weight: 600, color: "hsl(215, 19%, 55%)" },
-    { text: "sistem", size: "text-3xl", weight: 700, color: "hsl(215, 16%, 50%)" },
-    { text: "fitur", size: "text-2xl", weight: 600, color: "hsl(215, 18%, 54%)" },
-    { text: "interface", size: "text-xl", weight: 500, color: "hsl(215, 20%, 58%)" },
-    { text: "tampilan", size: "text-2xl", weight: 600, color: "hsl(215, 17%, 53%)" },
-    { text: "notifikasi", size: "text-xl", weight: 500, color: "hsl(215, 19%, 57%)" },
-    { text: "menu", size: "text-xl", weight: 500, color: "hsl(215, 21%, 59%)" },
-    { text: "pengaturan", size: "text-2xl", weight: 600, color: "hsl(215, 16%, 51%)" },
-  ];
-  const neutralPositions = getWordPositions(neutralWordsData.length);
-  const neutralWords = neutralWordsData.map((word, i) => ({ ...word, position: neutralPositions[i] }));
-
-  const negativeWordsData = [
-    { text: "error", size: "text-6xl", weight: 900, color: "hsl(0, 84%, 60%)" },
-    { text: "gagal", size: "text-5xl", weight: 900, color: "hsl(0, 80%, 55%)" },
-    { text: "susah", size: "text-4xl", weight: 800, color: "hsl(0, 76%, 50%)" },
-    { text: "tidak bisa login", size: "text-5xl", weight: 900, color: "hsl(0, 82%, 58%)" },
-    { text: "lambat", size: "text-4xl", weight: 800, color: "hsl(0, 78%, 52%)" },
-    { text: "crash", size: "text-3xl", weight: 700, color: "hsl(0, 72%, 48%)" },
-    { text: "bug", size: "text-4xl", weight: 800, color: "hsl(0, 79%, 54%)" },
-    { text: "lemot", size: "text-3xl", weight: 700, color: "hsl(0, 74%, 49%)" },
-    { text: "ribet", size: "text-2xl", weight: 600, color: "hsl(0, 70%, 46%)" },
-    { text: "force close", size: "text-3xl", weight: 700, color: "hsl(0, 75%, 50%)" },
-    { text: "loading", size: "text-2xl", weight: 600, color: "hsl(0, 68%, 44%)" },
-    { text: "boros baterai", size: "text-xl", weight: 500, color: "hsl(0, 65%, 42%)" },
-    { text: "hang", size: "text-2xl", weight: 600, color: "hsl(0, 71%, 47%)" },
-    { text: "jelek", size: "text-xl", weight: 500, color: "hsl(0, 66%, 43%)" },
-  ];
-  const negativePositions = getWordPositions(negativeWordsData.length);
-  const negativeWords = negativeWordsData.map((word, i) => ({ ...word, position: negativePositions[i] }));
+  const negativeOptions = {
+    rotations: 2,
+    rotationAngles: [-15, 0] as [number, number],
+    fontSizes: [20, 80] as [number, number],
+    colors: [
+      "hsl(0, 84%, 60%)",
+      "hsl(0, 80%, 55%)",
+      "hsl(0, 76%, 50%)",
+      "hsl(0, 82%, 58%)",
+      "hsl(0, 78%, 52%)",
+      "hsl(0, 79%, 54%)",
+    ],
+    enableTooltip: true,
+    deterministic: false,
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontWeight: "bold",
+    padding: 2,
+    scale: "sqrt" as const,
+    spiral: "archimedean" as const,
+    transitionDuration: 1000,
+  };
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -100,30 +143,14 @@ const WordCloud = () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-gradient-sage animate-pulse" />
-                  <Badge className="bg-gradient-sage text-white border-none px-5 py-2 rounded-full shadow-elegant text-sm font-bold">
+                  <Badge className="bg-gradient-sage text-white border-none px-5 py-2 rounded-full shadow-soft text-sm font-bold">
                     Positif
                   </Badge>
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">2.840 ulasan</span>
               </div>
-              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-sage-100/50 dark:border-sage-100/10 backdrop-blur-sm overflow-hidden">
-                {positiveWords.map((word, index) => (
-                  <span
-                    key={index}
-                    className={`${word.size} absolute transition-all duration-300 cursor-pointer hover:scale-125 hover:z-50 animate-fade-in drop-shadow-lg whitespace-nowrap select-none`}
-                    style={{ 
-                      top: word.position.top,
-                      left: word.position.left,
-                      transform: `rotate(${word.position.rotate})`,
-                      animationDelay: `${index * 0.1}s`,
-                      fontWeight: word.weight,
-                      color: word.color,
-                      textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    {word.text}
-                  </span>
-                ))}
+              <div className="relative h-[600px] w-full p-6 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-sage-100/50 dark:border-sage-100/10 backdrop-blur-sm overflow-hidden">
+                <ReactWordcloud words={positiveWords} options={positiveOptions} />
               </div>
             </div>
           </Card>
@@ -136,30 +163,14 @@ const WordCloud = () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-muted-foreground animate-pulse" />
-                  <Badge className="bg-muted-foreground text-white border-none px-5 py-2 rounded-full shadow-elegant text-sm font-bold">
+                  <Badge className="bg-muted-foreground text-white border-none px-5 py-2 rounded-full shadow-soft text-sm font-bold">
                     Netral
                   </Badge>
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">4.180 ulasan</span>
               </div>
-              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-muted/50 backdrop-blur-sm overflow-hidden">
-                {neutralWords.map((word, index) => (
-                  <span
-                    key={index}
-                    className={`${word.size} absolute transition-all duration-300 cursor-pointer hover:scale-125 hover:z-50 animate-fade-in drop-shadow-lg whitespace-nowrap select-none`}
-                    style={{ 
-                      top: word.position.top,
-                      left: word.position.left,
-                      transform: `rotate(${word.position.rotate})`,
-                      animationDelay: `${index * 0.1}s`,
-                      fontWeight: word.weight,
-                      color: word.color,
-                      textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    {word.text}
-                  </span>
-                ))}
+              <div className="relative h-[600px] w-full p-6 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-muted/50 backdrop-blur-sm overflow-hidden">
+                <ReactWordcloud words={neutralWords} options={neutralOptions} />
               </div>
             </div>
           </Card>
@@ -172,30 +183,14 @@ const WordCloud = () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-gradient-to-r from-destructive to-destructive/70 animate-pulse" />
-                  <Badge className="bg-gradient-to-r from-destructive/90 to-destructive text-white border-none px-5 py-2 rounded-full shadow-elegant text-sm font-bold">
+                  <Badge className="bg-gradient-to-r from-destructive/90 to-destructive text-white border-none px-5 py-2 rounded-full shadow-soft text-sm font-bold">
                     Negatif
                   </Badge>
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground bg-muted px-4 py-1.5 rounded-full">1.460 ulasan</span>
               </div>
-              <div className="relative min-h-[600px] w-full p-12 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-destructive/20 backdrop-blur-sm overflow-hidden">
-                {negativeWords.map((word, index) => (
-                  <span
-                    key={index}
-                    className={`${word.size} absolute transition-all duration-300 cursor-pointer hover:scale-125 hover:z-50 animate-fade-in drop-shadow-lg whitespace-nowrap select-none`}
-                    style={{ 
-                      top: word.position.top,
-                      left: word.position.left,
-                      transform: `rotate(${word.position.rotate})`,
-                      animationDelay: `${index * 0.1}s`,
-                      fontWeight: word.weight,
-                      color: word.color,
-                      textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    {word.text}
-                  </span>
-                ))}
+              <div className="relative h-[600px] w-full p-6 bg-gradient-to-br from-background/50 to-transparent rounded-3xl border border-destructive/20 backdrop-blur-sm overflow-hidden">
+                <ReactWordcloud words={negativeWords} options={negativeOptions} />
               </div>
             </div>
           </Card>
@@ -204,7 +199,7 @@ const WordCloud = () => {
         <Card className="mt-6 p-6 rounded-3xl border-none shadow-soft bg-card">
           <h3 className="text-lg font-semibold text-foreground mb-4">Tentang Word Cloud</h3>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Word cloud menampilkan kata-kata yang paling sering muncul dalam ulasan. Ukuran teks menunjukkan frekuensi kemunculan kata tersebut. Kata-kata ini memberikan gambaran cepat tentang topik atau masalah utama yang dibahas pengguna dalam setiap kategori sentimen.
+            Word cloud menampilkan kata-kata yang paling sering muncul dalam ulasan. Ukuran teks menunjukkan frekuensi kemunculan kata tersebut. Hover pada kata untuk melihat detail frekuensinya. Kata-kata ini memberikan gambaran cepat tentang topik atau masalah utama yang dibahas pengguna dalam setiap kategori sentimen.
           </p>
         </Card>
       </main>
