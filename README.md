@@ -533,15 +533,6 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 ---
 
-## 📞 Support
-
-Untuk pertanyaan atau masalah:
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/sirekap-sentiment-analysis/issues)
-- **Email**: your.email@example.com
-- **Documentation**: [DEPLOYMENT.md](DEPLOYMENT.md)
-
----
-
 <div align="center">
 
 **⭐ Star this repo if you find it useful!**
