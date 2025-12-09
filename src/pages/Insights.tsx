@@ -7,36 +7,36 @@ const Insights = () => {
   const topIssues = [
     {
       title: "Tidak bisa login",
-      count: 3240,
-      percentage: 38.6,
+      count: 3971,
+      percentage: 29.4,
       icon: Shield,
       color: "text-destructive",
     },
     {
       title: "Error saat membuka aplikasi",
-      count: 2180,
-      percentage: 26.0,
+      count: 865,
+      percentage: 6.4,
       icon: AlertCircle,
       color: "text-destructive",
     },
     {
       title: "Lambat memuat data",
-      count: 1560,
-      percentage: 18.6,
+      count: 612,
+      percentage: 4.5,
       icon: TrendingDown,
       color: "text-destructive",
     },
     {
       title: "Gagal sinkronisasi",
-      count: 890,
-      percentage: 10.6,
+      count: 86,
+      percentage: 0.6,
       icon: Zap,
       color: "text-destructive",
     },
     {
       title: "Aplikasi force close",
-      count: 530,
-      percentage: 6.3,
+      count: 13,
+      percentage: 0.1,
       icon: AlertCircle,
       color: "text-destructive",
     },
@@ -63,8 +63,8 @@ const Insights = () => {
             <div className="flex-1">
               <h3 className="text-xl font-bold text-foreground mb-3">Perhatian Khusus Diperlukan</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Berdasarkan analisis <span className="font-semibold text-destructive">8.400 ulasan negatif</span>, ditemukan 5 masalah kritis yang memerlukan penanganan segera. 
-                Masalah login mendominasi dengan <span className="font-semibold text-destructive">38.6%</span> dari total keluhan negatif.
+                Berdasarkan analisis <span className="font-semibold text-destructive">13.493 ulasan negatif</span>, ditemukan 5 masalah kritis yang memerlukan penanganan segera. 
+                Masalah login mendominasi dengan <span className="font-semibold text-destructive">29.4%</span> dari total keluhan negatif.
               </p>
             </div>
           </div>

@@ -14,7 +14,19 @@ interface PredictionResult {
   confidence: number;
   reason: string;
   keywords: string[];
+  probs?: {              
+    positif: number;     
+    netral: number;
+    negatif: number;
+  };
 }
+
+const PIE_COLORS: Record<string, string> = {
+  Positif: "hsl(142, 76%, 40%)",
+  Netral: "hsl(215, 16%, 47%)",
+  Negatif: "hsl(0, 84%, 60%)",
+  Uncertainty: "hsl(var(--muted))",
+};
 
 const Predict = () => {
   const [text, setText] = useState("");
@@ -55,6 +67,24 @@ const Predict = () => {
     }
   };
 
+  const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+
+  type NbApiResponse = {
+    sentiment: "positif" | "netral" | "negatif"; // dari model NB
+    confidence: number;
+    reason?: string;
+    keywords?: string[];
+  };
+
+  type UISentiment = "Positif" | "Netral" | "Negatif";
+
+  const SENTIMENT_MAP: Record<NbApiResponse["sentiment"], UISentiment> = {
+    positif: "Positif",
+    netral: "Netral",
+    negatif: "Negatif",
+  };
+
   const handlePredict = async () => {
     if (!text.trim()) {
       toast({
@@ -69,36 +99,34 @@ const Predict = () => {
     setResult(null);
 
     try {
-      const { data, error } = await supabase.functions.invoke('predict-sentiment', {
-        body: { text }
+      const res = await fetch(`${API_BASE_URL}/predict`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
       });
 
-      if (error) {
-        throw error;
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
       }
+
+      const data = await res.json();
 
       if (data.error) {
         throw new Error(data.error);
       }
 
-      setResult(data);
+      setResult(data as PredictionResult);
+      console.log("NB DEBUG:", (data as any).nb_debug);
+
       toast({
         title: "Prediksi Berhasil",
         description: `Sentimen terdeteksi: ${data.sentiment}`,
       });
     } catch (error: any) {
-      console.error('Error predicting sentiment:', error);
-      
-      let errorMessage = 'Gagal melakukan prediksi. Silakan coba lagi.';
-      if (error.message?.includes('429')) {
-        errorMessage = 'Terlalu banyak permintaan. Silakan tunggu sebentar.';
-      } else if (error.message?.includes('402')) {
-        errorMessage = 'Kredit AI habis. Silakan hubungi administrator.';
-      }
-      
+      console.error("Error predicting sentiment:", error);
       toast({
         title: "Terjadi Kesalahan",
-        description: errorMessage,
+        description: "Gagal melakukan prediksi. Silakan coba lagi.",
         variant: "destructive",
       });
     } finally {
@@ -234,29 +262,71 @@ const Predict = () => {
                 <Card className="p-6 rounded-3xl border-none shadow-soft bg-card">
                   <div className="flex items-center gap-2 mb-4">
                     <BarChart3 className="w-5 h-5 text-primary" />
-                    <h4 className="font-semibold text-foreground">Distribusi Confidence</h4>
+                    <h4 className="font-semibold text-foreground">
+                      Distribusi Probabilitas Sentimen
+                    </h4>
                   </div>
-                  <ResponsiveContainer width="100%" height={200}>
+
+                  <ResponsiveContainer width="100%" height={220}>
                     <PieChart>
                       <Pie
-                        data={[
-                          { name: result.sentiment, value: result.confidence },
-                          { name: 'Uncertainty', value: 100 - result.confidence }
-                        ]}
+                        data={
+                          result.probs
+                            ? [
+                                { name: "Positif", value: result.probs.positif * 100 },
+                                { name: "Netral", value: result.probs.netral * 100 },
+                                { name: "Negatif", value: result.probs.negatif * 100 },
+                              ]
+                            : [
+                                // fallback kalau (sementara) backend belum ada probs
+                                { name: result.sentiment, value: result.confidence },
+                                { name: "Uncertainty", value: 100 - result.confidence },
+                              ]
+                        }
                         cx="50%"
                         cy="50%"
                         innerRadius={60}
                         outerRadius={80}
-                        paddingAngle={5}
+                        paddingAngle={4}
                         dataKey="value"
                       >
-                        <Cell fill="hsl(var(--primary))" />
-                        <Cell fill="hsl(var(--muted))" />
+                        {(
+                          result.probs
+                            ? ["Positif", "Netral", "Negatif"]
+                            : [result.sentiment, "Uncertainty"]
+                        ).map((name) => (
+                          <Cell
+                            key={name}
+                            fill={PIE_COLORS[name] ?? "hsl(var(--muted))"}
+                          />
+                        ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip
+                        formatter={(value: number, name: string) => [
+                          `${(value as number).toFixed(1)}%`,
+                          name,
+                        ]}
+                      />
                       <Legend />
                     </PieChart>
                   </ResponsiveContainer>
+
+                  {result.probs && (
+                    <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-muted-foreground">
+                      <div className="flex flex-col items-center">
+                        <span className="font-semibold text-emerald-600">Positif</span>
+                        <span>{(result.probs.positif * 100).toFixed(1)}%</span>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <span className="font-semibold text-slate-600">Netral</span>
+                        <span>{(result.probs.netral * 100).toFixed(1)}%</span>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <span className="font-semibold text-red-600">Negatif</span>
+                        <span>{(result.probs.negatif * 100).toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  )}
                 </Card>
 
                 {/* Word Cloud */}
@@ -320,10 +390,11 @@ const Predict = () => {
           <Card className="mt-6 p-6 rounded-3xl border-none shadow-soft bg-card">
             <h3 className="text-lg font-semibold text-foreground mb-4">💡 Tentang Prediksi</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>• Model AI menganalisis teks menggunakan natural language processing</p>
-              <p>• Sentimen dikategorikan menjadi: Positif, Netral, atau Negatif</p>
-              <p>• Confidence score menunjukkan tingkat kepercayaan prediksi (0-100%)</p>
-              <p>• Hasil prediksi dapat membantu memahami persepsi pengguna terhadap aplikasi</p>
+              <p>• Sistem menggunakan pendekatan <span className="font-semibold">hybrid</span> antara model Multinomial Naive Bayes dan model generatif (Gemini).</p>
+              <p>• <span className="font-semibold">Naive Bayes</span> bertugas mengklasifikasikan ulasan ke dalam tiga kategori sentimen: Positif, Netral, atau Negatif.</p>
+              <p>• <span className="font-semibold">Gemini</span> digunakan sebagai modul penjelas untuk memberikan alasan (reason) dan mengekstraksi kata kunci penting dari teks ulasan.</p>
+              <p>• Confidence score berasal dari probabilitas tertinggi model Naive Bayes (0–100%), sedangkan chart distribusi menunjukkan probabilitas ketiga kelas sentimen.</p>
+              <p>• Hasil prediksi dan penjelasan membantu tim memahami persepsi pengguna serta mengidentifikasi area perbaikan pada aplikasi.</p>
             </div>
           </Card>
         </div>

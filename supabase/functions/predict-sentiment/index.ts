@@ -1,153 +1,208 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
+
+const MODEL_API_URL =
+  Deno.env.get("MODEL_API_URL") ?? "http://127.0.0.1:8000";
+const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
+
+type NbSentiment = "negatif" | "netral" | "positif";
+type UiSentiment = "Negatif" | "Netral" | "Positif";
+
+const SENTIMENT_MAP: Record<NbSentiment, UiSentiment> = {
+  negatif: "Negatif",
+  netral: "Netral",
+  positif: "Positif",
 };
 
 serve(async (req) => {
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const { text } = await req.json();
-    
-    if (!text || text.trim().length === 0) {
+
+    if (!text || !text.trim()) {
       return new Response(
-        JSON.stringify({ error: 'Teks tidak boleh kosong' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "Teks tidak boleh kosong" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
       );
     }
 
-    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+    console.log("➡️ Edge menerima teks:", text.substring(0, 80) + "...");
+    console.log("➡️ MODEL_API_URL:", MODEL_API_URL);
+
+    // 1️⃣ Panggil API Naive Bayes (backend kamu)
+    const nbResp = await fetch(`${MODEL_API_URL}/predict`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+
+    console.log("➡️ NB status code:", nbResp.status);
+
+    if (!nbResp.ok) {
+      const errBody = await nbResp.text();
+      console.error("NB API ERROR:", nbResp.status, errBody);
+
+      return new Response(
+        JSON.stringify({
+          error: "Gagal memproses prediksi dari model Naive Bayes",
+        }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    const nbResult = await nbResp.json();
+    console.log("✅ NB RESULT (raw):", nbResult);
+
+    const nbSentiment: NbSentiment = nbResult.sentiment ?? "netral";
+    const nbConfidence: number = nbResult.confidence ?? 70;
+    const uiSentiment: UiSentiment =
+      SENTIMENT_MAP[nbSentiment] ?? "Netral";
+
+    // 2️⃣ Kalau ga ada LOVABLE_API_KEY → pakai NB saja (tanpa Gemini)
     if (!LOVABLE_API_KEY) {
-      console.error('LOVABLE_API_KEY tidak ditemukan');
+      console.warn("⚠️ LOVABLE_API_KEY tidak ditemukan, skip Gemini.");
+
+      const fallback = {
+        sentiment: uiSentiment,
+        confidence: nbConfidence,
+        reason:
+          "Prediksi berdasarkan model Multinomial Naive Bayes yang dilatih pada ulasan SIREKAP.",
+        keywords: [],
+        nb_debug: nbResult, // <— buat cek di FE/log
+      };
+
       return new Response(
-        JSON.stringify({ error: 'Konfigurasi server tidak valid' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify(fallback),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
-    console.log('Memproses prediksi sentimen untuk teks:', text.substring(0, 50) + '...');
+    // 3️⃣ Panggil Gemini hanya untuk reason + keywords
+    const systemPrompt = `Kamu adalah modul PENJELAS untuk sistem analisis sentimen ulasan aplikasi SIREKAP.
 
-    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'google/gemini-2.5-flash-lite',
-        messages: [
-          {
-            role: 'system',
-            content: `Kamu adalah sistem analisis sentimen untuk ulasan aplikasi SIREKAP. 
-Tugas kamu adalah mengklasifikasikan ulasan pengguna ke dalam 3 kategori: Positif, Netral, atau Negatif.
+Model utama (Multinomial Naive Bayes) SUDAH MENENTUKAN label sentimen ulasan.
+Label final dari model utama adalah: "${uiSentiment}" (Positif/Netral/Negatif).
 
-Kriteria:
-- POSITIF: Ulasan yang menunjukkan kepuasan, pujian, atau pengalaman baik (kata seperti: bagus, mantap, membantu, mudah, lancar, sukses, terima kasih)
-- NETRAL: Ulasan yang bersifat informatif, pertanyaan, atau tidak ada sentimen jelas (kata seperti: login, update, versi, aplikasi, data, sistem)
-- NEGATIF: Ulasan yang menunjukkan keluhan, masalah, atau ketidakpuasan (kata seperti: error, gagal, susah, tidak bisa, lambat, crash, bug, buruk)
+Tugas kamu HANYA:
+- Menjelaskan alasan (reason) kenapa ulasan ini masuk kategori tersebut
+- Mengambil kata/frasa kunci penting (keywords) dari ulasan
+- (Opsional) memberikan confidence versimu sendiri
 
-Berikan respons HANYA dalam format JSON berikut tanpa teks tambahan:
+ATURAN PENTING:
+- Jangan mengubah label sentimen final.
+- Jangan menulis apapun di luar JSON.
+
+Format respons WAJIB:
 {
   "sentiment": "Positif" | "Netral" | "Negatif",
   "confidence": <angka 0-100>,
   "reason": "penjelasan singkat mengapa dikategorikan demikian",
   "keywords": ["kata1", "kata2", "kata3"]
-}`
-          },
-          {
-            role: 'user',
-            content: `Analisis sentimen dari ulasan berikut: "${text}"`
-          }
-        ],
-        temperature: 0.3,
-      }),
-    });
+}`;
 
-    if (!response.ok) {
-      if (response.status === 429) {
-        console.error('Rate limit exceeded');
-        return new Response(
-          JSON.stringify({ error: 'Terlalu banyak permintaan. Silakan coba lagi nanti.' }),
-          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
-      if (response.status === 402) {
-        console.error('Payment required');
-        return new Response(
-          JSON.stringify({ error: 'Kredit AI habis. Silakan hubungi administrator.' }),
-          { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
+    const geminiResp = await fetch(
+      "https://ai.gateway.lovable.dev/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash-lite",
+          messages: [
+            { role: "system", content: systemPrompt },
+            {
+              role: "user",
+              content:
+                `Ulasan pengguna: "${text}". Jelaskan alasan dan daftar kata kunci.`,
+            },
+          ],
+          temperature: 0.3,
+        }),
+      },
+    );
 
-      const errorText = await response.text();
-      console.error('AI API error:', response.status, errorText);
+    if (!geminiResp.ok) {
+      const errorText = await geminiResp.text();
+      console.error("Gemini API error:", geminiResp.status, errorText);
+
+      const fallback = {
+        sentiment: uiSentiment,
+        confidence: nbConfidence,
+        reason:
+          "Prediksi berdasarkan model Multinomial Naive Bayes. Modul penjelas (Gemini) gagal dipanggil.",
+        keywords: [],
+        nb_debug: nbResult,
+      };
+
       return new Response(
-        JSON.stringify({ error: 'Gagal memproses prediksi' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify(fallback),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
-    const data = await response.json();
-    console.log('Response dari AI:', JSON.stringify(data));
+    const gemData = await geminiResp.json();
+    console.log("📩 Respons mentah Gemini:", JSON.stringify(gemData));
 
-    const aiResponse = data.choices[0].message.content;
-    
-    // Parse JSON response dari AI
-    let result;
+    const aiContent: string = gemData.choices?.[0]?.message?.content ?? "";
+
+    // 4️⃣ Parse JSON dari Gemini
+    let gemResult: any = {};
     try {
-      // Coba ekstrak JSON dari response
-      const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+      const jsonMatch = aiContent.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
-        result = JSON.parse(jsonMatch[0]);
+        gemResult = JSON.parse(jsonMatch[0]);
+      } else if (aiContent.trim().startsWith("{")) {
+        gemResult = JSON.parse(aiContent);
       } else {
-        result = JSON.parse(aiResponse);
+        throw new Error("Tidak menemukan JSON valid di respons Gemini");
       }
-    } catch (parseError) {
-      console.error('Error parsing AI response:', parseError);
-      // Fallback: coba deteksi sentimen dari keywords
-      const lowerText = text.toLowerCase();
-      let sentiment = 'Netral';
-      let confidence = 60;
-      
-      const positiveWords = ['bagus', 'mantap', 'bantu', 'mudah', 'lancar', 'sukses', 'terima kasih', 'praktis', 'cepat'];
-      const negativeWords = ['error', 'gagal', 'susah', 'tidak bisa', 'lambat', 'crash', 'bug', 'buruk', 'jelek'];
-      
-      const hasPositive = positiveWords.some(word => lowerText.includes(word));
-      const hasNegative = negativeWords.some(word => lowerText.includes(word));
-      
-      if (hasNegative && !hasPositive) {
-        sentiment = 'Negatif';
-        confidence = 75;
-      } else if (hasPositive && !hasNegative) {
-        sentiment = 'Positif';
-        confidence = 75;
-      }
-      
-      result = {
-        sentiment,
-        confidence,
-        reason: 'Analisis berdasarkan kata kunci dalam ulasan',
-        keywords: []
-      };
+    } catch (parseErr) {
+      console.error("Error parsing JSON dari Gemini:", parseErr);
+      gemResult = {};
     }
 
-    console.log('Hasil prediksi:', result);
+    const finalResult = {
+      sentiment: uiSentiment, // 🔒 LABEL FIX dari NB
+      confidence: nbConfidence ?? gemResult.confidence ?? 70,
+      reason:
+        gemResult.reason ??
+        "Prediksi berdasarkan model Multinomial Naive Bayes yang dilatih pada ulasan SIREKAP.",
+      keywords: Array.isArray(gemResult.keywords) ? gemResult.keywords : [],
+      nb_debug: nbResult, // <— untuk cek di FE/log
+    };
+
+    console.log("✅ HASIL FINAL HYBRID:", finalResult);
 
     return new Response(
-      JSON.stringify(result),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify(finalResult),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
+  } catch (err) {
+    console.error("💥 Error di predict-sentiment hybrid:", err);
+    const msg = err instanceof Error ? err.message : "Terjadi kesalahan internal";
 
-  } catch (error) {
-    console.error('Error dalam predict-sentiment:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan internal';
     return new Response(
-      JSON.stringify({ error: errorMessage }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ error: msg }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      },
     );
   }
 });

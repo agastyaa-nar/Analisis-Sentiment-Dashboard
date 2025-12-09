@@ -4,18 +4,18 @@ import { TrendingUp, TrendingDown, Minus, Star } from "lucide-react";
 
 const Dashboard = () => {
   const sentimentData = {
-    total: 15420,
-    positive: 2840,
-    neutral: 4180,
-    negative: 8400,
+    total:16557,
+    positive: 2209,
+    neutral: 855,
+    negative: 13493,
   };
 
   const ratingData = [
-    { stars: 5, count: 1240 },
-    { stars: 4, count: 1600 },
-    { stars: 3, count: 4180 },
-    { stars: 2, count: 3600 },
-    { stars: 1, count: 4800 },
+    { stars: 5, count: 1827 },
+    { stars: 4, count: 382 },
+    { stars: 3, count: 855 },
+    { stars: 2, count: 1336 },
+    { stars: 1, count: 12157 },
   ];
 
   const positivePercent = ((sentimentData.positive / sentimentData.total) * 100).toFixed(1);

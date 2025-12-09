@@ -29,9 +29,9 @@ const Index = () => {
   ];
 
   const stats = [
-    { label: "Total Ulasan", value: "15.420", icon: Users },
-    { label: "Akurasi Model", value: "92.3%", icon: BarChart3 },
-    { label: "Kata Teranalisis", value: "150K+", icon: MessageSquare },
+    { label: "Total Ulasan", value: "16.557", icon: Users },
+    { label: "Akurasi Model", value: "91.14%", icon: BarChart3 },
+    { label: "Kata Teranalisis", value: "182.408", icon: MessageSquare },
   ];
 
   return (
@@ -149,7 +149,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-border">
         <div className="text-center text-sm text-muted-foreground">
-          <p>© 2025 SIREKAP Analytics. Proyek Kerja Praktik - Komisi Pemilihan Umum</p>
+          <p>© 2025 SIREKAP Analytics. Proyek Kerja Praktik - Komisi Pemilihan Umum Provinsi Jawa Timur</p>
         </div>
       </footer>
     </div>
