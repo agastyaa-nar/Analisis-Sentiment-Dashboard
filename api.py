@@ -55,14 +55,21 @@ stemmer = StemmerFactory().create_stemmer()
 stop_factory = StopWordRemoverFactory()
 stopwords = set(stop_factory.get_stop_words())
 
-# Ensure NLTK punkt is available in production
+# Ensure NLTK punkt_tab is available in production (required by NLTK 3.9+)
 try:
-    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('tokenizers/punkt_tab')
 except LookupError:
     try:
-        nltk.download('punkt')
-    except Exception:
-        print("Warning: failed to download NLTK 'punkt'. Tokenization may fail.")
+        print("Downloading NLTK punkt_tab...")
+        nltk.download('punkt_tab', quiet=False)
+        print("NLTK punkt_tab downloaded successfully")
+    except Exception as e:
+        print(f"Warning: failed to download NLTK 'punkt_tab': {e}")
+        print("Tokenization may fail. Trying fallback 'punkt'...")
+        try:
+            nltk.download('punkt', quiet=False)
+        except Exception:
+            pass
 
 # Pertahankan kata negasi / pengubah
 negation_words = {"tidak", "bukan", "kurang", "belum", "tak"}
