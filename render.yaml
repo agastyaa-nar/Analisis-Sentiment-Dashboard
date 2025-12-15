@@ -10,7 +10,3 @@ services:
     envVars:
       - key: GEMINI_API_KEY
         sync: false
-    disk:
-      name: model-artifacts
-      mountPath: /opt/render/project/src/artifacts
-      sizeGB: 1
