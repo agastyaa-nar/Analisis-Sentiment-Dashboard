@@ -36,19 +36,12 @@ print("API classes:", nb_model.classes_)
 print("API tfidf vocab size:", len(tfidf.vocabulary_))
 
 
-app = FastAPI()
+app = FastAPI(title="SIREKAP Sentiment API", version="1.0")
 
-# === CORS: dev + nanti bisa dibatasi ke domain Vercel ===
-origins = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    # nanti kalau sudah deploy FE di Vercel, tambahin:
-    # "https://nama-frontend-kamu.vercel.app",
-]
-
+# === CORS: Allow Vercel frontend ===
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # boleh dipersempit nanti ke origins kalau sudah produksi
+    allow_origins=["*"],  # Allow all for now; can restrict to Vercel domain later
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -100,6 +93,21 @@ def simple_preprocess(text: str) -> str:
     tokens = [t for t in word_tokenize(text) if t not in stopwords and len(t) > 1]
     return " ".join(stemmer.stem(t) for t in tokens)
 # ==========================================================
+
+
+@app.get("/")
+async def root():
+    """Health check endpoint"""
+    return {
+        "status": "ok",
+        "service": "SIREKAP Sentiment Analysis API",
+        "version": "1.0",
+        "endpoints": {
+            "/": "Health check (this page)",
+            "/predict": "POST - Predict sentiment from text",
+            "/docs": "API documentation (Swagger UI)"
+        }
+    }
 
 
 def call_gemini_direct(ui_sentiment: str, text: str):
@@ -229,6 +237,8 @@ Format respons WAJIB:
 
 @app.post("/predict")
 async def predict(req: Request, body: PredictRequest):
+    """Predict sentiment from Indonesian text using Naive Bayes + Gemini"""
+    print(f"\n==> POST /predict from {req.client.host}")
     text = body.text
 
     if not text or not text.strip():
