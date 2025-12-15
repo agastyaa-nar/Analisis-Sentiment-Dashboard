@@ -15,6 +15,7 @@ import emoji
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from nltk.tokenize import word_tokenize
+import nltk
 
 # === Load env (GEMINI_API_KEY dari .env) ===
 load_dotenv()
@@ -60,6 +61,15 @@ print("GEMINI_API_KEY prefix:", GEMINI_API_KEY[:8] if GEMINI_API_KEY else "NONE"
 stemmer = StemmerFactory().create_stemmer()
 stop_factory = StopWordRemoverFactory()
 stopwords = set(stop_factory.get_stop_words())
+
+# Ensure NLTK punkt is available in production
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    try:
+        nltk.download('punkt')
+    except Exception:
+        print("Warning: failed to download NLTK 'punkt'. Tokenization may fail.")
 
 # Pertahankan kata negasi / pengubah
 negation_words = {"tidak", "bukan", "kurang", "belum", "tak"}
