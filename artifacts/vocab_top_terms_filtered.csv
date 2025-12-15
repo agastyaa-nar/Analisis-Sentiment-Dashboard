@@ -1,0 +1,440 @@
+term,mean_tfidf,class_
+mantap,0.013437,positif
+sangat bantu,0.011227,positif
+sukses,0.008489,positif
+manfaat,0.004845,positif
+oke,0.004372,positif
+sangat bagus,0.00437,positif
+keren,0.00383,positif
+luar,0.003637,positif
+pilkada,0.003607,positif
+akurat,0.003052,positif
+aplikasi bagus,0.002858,positif
+moga hari,0.002769,positif
+sukses milu,0.002758,positif
+jaya,0.002701,positif
+sedikit,0.002673,positif
+sangat baik,0.002649,positif
+moga tidak,0.002593,positif
+smoga,0.002555,positif
+luar biasa,0.002546,positif
+maju,0.002516,positif
+jalan lancar,0.00243,positif
+lebih mudah,0.002399,positif
+moga sukses,0.002308,positif
+sangat manfaat,0.002113,positif
+mudah guna,0.00207,positif
+bantu sekali,0.002049,positif
+alam,0.001964,positif
+tarik,0.001948,positif
+jos,0.001941,positif
+tepat,0.00192,positif
+bagus sekali,0.001911,positif
+walaupun,0.001785,positif
+moga aplikasi,0.001752,positif
+bagus sangat,0.001748,positif
+umum,0.001736,positif
+normal,0.001723,positif
+loding,0.001693,positif
+dukung,0.00169,positif
+awas,0.001689,positif
+aktif,0.001672,positif
+percaya,0.001666,positif
+up,0.001665,positif
+jujur,0.001597,positif
+sangat mudah,0.001578,positif
+sangat bantu sekali,0.001555,positif
+inovasi,0.001538,positif
+top,0.001526,positif
+bismillah,0.001524,positif
+lancar jaya,0.001496,positif
+muas,0.001465,positif
+hitung suara,0.001459,positif
+sirekap sangat,0.001449,positif
+tidak masalah,0.001426,positif
+nice,0.00142,positif
+stabil,0.001415,positif
+bagus mudah,0.001413,positif
+bagus emo_senang,0.001409,positif
+ayo,0.001385,positif
+moga manfaat,0.001382,positif
+baguss,0.001366,positif
+maintenance,0.001362,positif
+paham,0.001359,positif
+lupa pasword,0.001356,positif
+bos,0.00135,positif
+mantapp,0.001342,positif
+ka,0.001327,positif
+betul,0.001288,positif
+aplikasi guna,0.001272,positif
+batu,0.001267,positif
+aplikasi mudah,0.001266,positif
+gimana cara,0.001249,positif
+pilpres,0.001248,positif
+sirekap tidak,0.001248,positif
+mudah kerja,0.001247,positif
+alhamdulillah lancar,0.001243,positif
+hari tidak,0.001239,positif
+aplikasi sangat bagus,0.001228,positif
+info,0.001211,positif
+bagus aplikasi,0.001208,positif
+test,0.001198,positif
+lancar tidak,0.001189,positif
+go,0.001181,positif
+mudah lancar,0.001162,positif
+otentikasi,0.00115,positif
+operator,0.00115,positif
+gx,0.001144,positif
+moga jalan,0.001143,positif
+lancar pas,0.00114,positif
+ios,0.001133,positif
+lebih cepat,0.001126,positif
+rekapitulasi,0.00112,positif
+tunjuk,0.00111,positif
+baik sangat,0.00111,positif
+sirekap mantap,0.001088,positif
+sinyal,0.001086,positif
+mantap aplikasi,0.001084,positif
+moga bantu,0.001078,positif
+joss,0.001075,positif
+aamiin,0.001075,positif
+lupa sandi,0.001073,positif
+layan,0.001064,positif
+moga lebih,0.00106,positif
+mantul,0.001052,positif
+no,0.001049,positif
+kereeen,0.001043,positif
+jurdil,0.001034,positif
+bantu kerja,0.001033,positif
+sangat penting,0.001033,positif
+juang,0.001027,positif
+an lancar,0.001025,positif
+mudah an lancar,0.001025,positif
+rating,0.001024,positif
+feb,0.001017,positif
+lola,0.001009,positif
+moga mudah,0.001005,positif
+transparansi,0.001003,positif
+dlm,0.000998,positif
+moga tidak kendala,0.000987,positif
+mudah cepat,0.000986,positif
+sertifikasi,0.000984,positif
+aplikasi sangat bantu,0.000983,positif
+sangat guna,0.000982,positif
+emo_lainnya emo_senang,0.000977,positif
+lebih tingkat,0.000975,positif
+damai,0.000974,positif
+hari nya,0.000973,positif
+tahu,0.000968,positif
+lengkap,0.000967,positif
+hebat,0.000961,positif
+sirekapnya,0.000959,positif
+ketua,0.000954,positif
+apresiasi,0.000953,positif
+bantu milu,0.000936,positif
+lapor,0.000931,positif
+ri,0.000931,positif
+masalah aplikasi,0.000925,positif
+laku inisial,0.000924,positif
+update jadi,0.000919,positif
+rasa,0.000917,positif
+selamat,0.000916,positif
+apik,0.000909,positif
+mantaf,0.000909,positif
+alami,0.000908,positif
+informasi,0.000906,positif
+moga guna,0.000904,positif
+nyaman,0.000903,positif
+pilih umum,0.000899,positif
+tidak down,0.000897,positif
+kabupaten,0.000894,positif
+masyarakat,0.000891,positif
+usaha,0.000887,positif
+bagus tidak,0.000885,positif
+sya,0.000883,positif
+mayan,0.000883,positif
+saksi,0.000881,positif
+kalau lupa,0.000879,positif
+moga jalan lancar,0.000878,positif
+salah terus,0.000877,positif
+bagusssss,0.000877,positif
+lima,0.000877,positif
+lebih bagus,0.000875,positif
+asik,0.000869,positif
+belum buka,0.000866,positif
+moga depan,0.000864,positif
+tdk kendala,0.000861,positif
+okay,0.000858,positif
+yuk,0.000856,positif
+belum coba,0.000853,positif
+mudah kpps,0.000847,positif
+bermamfaat,0.000847,positif
+bom masuk,0.000845,positif
+bagus bantu,0.000843,positif
+bintang dulu,0.003331,netral
+kurang baik,0.002719,netral
+knp,0.002301,netral
+ambil gambar,0.002238,netral
+mohon solusi,0.002167,netral
+update aplikasi,0.002153,netral
+loading lama,0.002085,netral
+mulai,0.002039,netral
+bagus banget,0.001984,netral
+maksud,0.001978,netral
+password salah,0.001976,netral
+knpa,0.001945,netral
+tulis aplikasi,0.00191,netral
+gagal masuk,0.001902,netral
+file,0.001881,netral
+susah log in,0.001862,netral
+susah log,0.001837,netral
+nyoba,0.001802,netral
+bnyak,0.001761,netral
+login gagal terus,0.001749,netral
+nya susah,0.001721,netral
+diupgrade,0.00172,netral
+simpan,0.001714,netral
+isi,0.001711,netral
+yg tidak,0.00166,netral
+padahal username,0.001654,netral
+belum masuk,0.001631,netral
+tadi,0.001605,netral
+enak,0.001597,netral
+gimna,0.001592,netral
+lanjut,0.001583,netral
+beda,0.001563,netral
+perlu tingkat,0.001558,netral
+kata sandi,0.001555,netral
+versi lama,0.001551,netral
+kok tidak,0.001547,netral
+masuk gak,0.001545,netral
+token,0.001543,netral
+mohon segera,0.001529,netral
+blm masuk,0.001529,netral
+per,0.001524,netral
+aplikasi mohon,0.001523,netral
+kasih bintang dulu,0.001523,netral
+cara atas,0.001521,netral
+baik login,0.00152,netral
+yaa,0.001512,netral
+akun sirekap,0.001502,netral
+cek,0.001486,netral
+login lama,0.001478,netral
+hilang,0.001467,netral
+banyak yg,0.001456,netral
+opsi,0.001453,netral
+belum guna,0.001446,netral
+mohon tingkat,0.00144,netral
+udah update,0.001432,netral
+baru malah,0.001426,netral
+gagal trus,0.001414,netral
+lama proses,0.001408,netral
+hubung,0.001406,netral
+otomatis,0.001393,netral
+device,0.001384,netral
+msh,0.001375,netral
+login username,0.001369,netral
+baru malah tidak,0.001356,netral
+scan,0.001351,netral
+mohon arah,0.001347,netral
+update malah ga,0.001344,netral
+susah sekali login,0.001339,netral
+proses verifikasi,0.001335,netral
+masuk terus,0.001328,netral
+buat update,0.00132,netral
+malah ga login,0.001316,netral
+sering susah masuk,0.001306,netral
+internet,0.001302,netral
+udah hari,0.001302,netral
+bahkan,0.001301,netral
+tingkat cepat,0.0013,netral
+rumit,0.0013,netral
+tidak masuk terus,0.001298,netral
+gitu,0.001298,netral
+berat aplikasi,0.001297,netral
+sekali login,0.001288,netral
+mula,0.001287,netral
+tidak log in,0.001283,netral
+bang,0.001279,netral
+terupdate,0.001276,netral
+tidak log,0.001275,netral
+sering susah,0.001274,netral
+maklum,0.001273,netral
+koreksi,0.00127,netral
+hp yg,0.001268,netral
+kndala,0.001262,netral
+notif,0.001261,netral
+dgn,0.001257,netral
+android versi,0.001257,netral
+masuk nya,0.001255,netral
+banyak update,0.001251,netral
+login admin,0.001251,netral
+rekap hasil milu,0.001232,netral
+solusi terima,0.00123,netral
+moga baik,0.001227,netral
+galeri,0.001222,netral
+inisial gagal,0.001213,netral
+berat,0.001205,netral
+sertifikat mohon,0.001203,netral
+msih,0.001202,netral
+trouble,0.001201,netral
+keluar sendiri,0.001197,netral
+masuk akun,0.001193,netral
+username password salah,0.001188,netral
+deteksi,0.001185,netral
+masukin,0.001185,netral
+flash,0.001179,netral
+malah ga,0.001178,netral
+mohon maaf,0.001178,netral
+tdk masuk,0.001177,netral
+blum maksimal,0.001175,netral
+upload foto,0.001169,netral
+lemooot,0.001168,netral
+cupu,0.001168,netral
+dokumen,0.001167,netral
+password bagaimana,0.001159,netral
+buruk,0.005777,negatif
+jelek,0.005082,negatif
+layak,0.004016,negatif
+negara,0.003757,negatif
+mudah malah,0.00359,negatif
+bukan mudah,0.003385,negatif
+malah sulit,0.003304,negatif
+kelas,0.002981,negatif
+buat aplikasi,0.002909,negatif
+mending,0.002757,negatif
+usah,0.002692,negatif
+aplikasi belum siap,0.002607,negatif
+bener,0.002596,negatif
+nyusahin,0.00258,negatif
+anggar,0.002499,negatif
+bikin aplikasi,0.002472,negatif
+masa,0.002439,negatif
+aplikasi gak,0.002336,negatif
+bukan mudah malah,0.00228,negatif
+sampah,0.002183,negatif
+payah,0.00215,negatif
+digitalisasi,0.002147,negatif
+hambat,0.002098,negatif
+mudah malah sulit,0.002041,negatif
+begini,0.001997,negatif
+dekat,0.001952,negatif
+cuma,0.001946,negatif
+sangat buruk,0.001942,negatif
+aneh,0.001922,negatif
+niat,0.001886,negatif
+belum layak,0.001882,negatif
+siap guna,0.001811,negatif
+bikin pusing,0.001806,negatif
+satu,0.001794,negatif
+sama sekali,0.001761,negatif
+kayak,0.001754,negatif
+matang,0.001752,negatif
+beban,0.001697,negatif
+buat login,0.001692,negatif
+repot,0.001658,negatif
+jangan paksa,0.001646,negatif
+habis,0.001641,negatif
+terlalu paksa,0.001622,negatif
+jgn,0.001614,negatif
+login aja susah,0.0016,negatif
+apl,0.001557,negatif
+aplikasi ga,0.001551,negatif
+kacau,0.001548,negatif
+abal,0.001545,negatif
+kalau belum,0.00152,negatif
+aplikasi buat,0.001491,negatif
+blm siap,0.001488,negatif
+besar,0.001484,negatif
+it,0.001472,negatif
+tidak layak,0.001463,negatif
+aplikasi apa,0.001459,negatif
+kek,0.001457,negatif
+gak jelas,0.001456,negatif
+busuk,0.001438,negatif
+paling,0.001422,negatif
+malah bikin,0.001404,negatif
+gajelas,0.001397,negatif
+gabisa login,0.001393,negatif
+ampun,0.001389,negatif
+aplikasi susah,0.001375,negatif
+error terus,0.001374,negatif
+dana,0.001361,negatif
+server down,0.001358,negatif
+sangat tidak,0.001358,negatif
+login padahal,0.001341,negatif
+aplikasi buruk,0.001336,negatif
+cacat,0.001332,negatif
+tolol,0.001318,negatif
+kaya gin,0.001314,negatif
+aplikasi jelek,0.00131,negatif
+doang,0.00131,negatif
+belum siap guna,0.0013,negatif
+aplikasi gagal,0.00128,negatif
+ga jelas,0.001274,negatif
+kerja kpps,0.001268,negatif
+burik,0.001267,negatif
+tpi,0.001261,negatif
+siap jangan,0.001259,negatif
+aplikasi bikin,0.001241,negatif
+aplikasi sampah,0.00124,negatif
+balik,0.001238,negatif
+mah,0.001235,negatif
+kalau belum siap,0.001227,negatif
+pakai aplikasi,0.001223,negatif
+pihak,0.001213,negatif
+aplikasi perintah,0.001211,negatif
+berapa,0.001203,negatif
+layak guna,0.001202,negatif
+macam,0.001191,negatif
+emang,0.001178,negatif
+minimal,0.001175,negatif
+aplikasi sulit,0.001172,negatif
+rakyat,0.00117,negatif
+maksa,0.001146,negatif
+bikin ribet,0.001146,negatif
+nama,0.001136,negatif
+angka,0.001134,negatif
+emo_marah,0.001134,negatif
+aku,0.00113,negatif
+sering eror,0.00112,negatif
+kalo belum,0.001108,negatif
+seperti,0.001103,negatif
+rusak,0.001103,negatif
+nambah,0.001098,negatif
+gara,0.001098,negatif
+pake aplikasi,0.001087,negatif
+gak usah,0.001084,negatif
+minta ampun,0.001079,negatif
+siap pakai,0.001066,negatif
+kecewa,0.001065,negatif
+ampas,0.001061,negatif
+bobrok,0.00106,negatif
+wa,0.001057,negatif
+erorr,0.001053,negatif
+sulit kerja,0.001047,negatif
+segala,0.001043,negatif
+layak pakai,0.001032,negatif
+belum siap jangan,0.001032,negatif
+apk belum,0.00103,negatif
+emosi,0.001021,negatif
+apk yg,0.001018,negatif
+buruk sekali,0.001018,negatif
+anak,0.001008,negatif
+capek,0.001007,negatif
+kali kali,0.001,negatif
+kaga,0.000996,negatif
+luncur,0.000995,negatif
+lambat kerja,0.000994,negatif
+hari milu,0.000991,negatif
+gmna,0.000982,negatif
+bsa,0.000981,negatif
+mumet,0.000977,negatif
+padahal udah,0.000976,negatif
+banyak eror,0.000973,negatif
+bakal,0.000971,negatif
+mutu,0.000971,negatif
+malah jadi,0.00097,negatif
+diupdate,0.000966,negatif
+kalah,0.000964,negatif
+mampu,0.000955,negatif

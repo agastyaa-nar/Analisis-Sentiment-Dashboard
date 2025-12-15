@@ -1,0 +1,765 @@
+{
+  "summary": {
+    "positif": 2201,
+    "netral": 856,
+    "negatif": 13543
+  },
+  "wordcloud": {
+    "positif": [
+      {
+        "text": "moga",
+        "score": 1.0,
+        "raw_score": 0.024165
+      },
+      {
+        "text": "sangat",
+        "score": 0.9092985826281087,
+        "raw_score": 0.022418
+      },
+      {
+        "text": "bagus",
+        "score": 0.752608898811069,
+        "raw_score": 0.0194
+      },
+      {
+        "text": "aplikasi",
+        "score": 0.681324957167333,
+        "raw_score": 0.018027
+      },
+      {
+        "text": "bantu",
+        "score": 0.6475260889881106,
+        "raw_score": 0.017376
+      },
+      {
+        "text": "lancar",
+        "score": 0.5637817351124033,
+        "raw_score": 0.015763
+      },
+      {
+        "text": "mudah",
+        "score": 0.5242718446601942,
+        "raw_score": 0.015002
+      },
+      {
+        "text": "tidak",
+        "score": 0.518249312081408,
+        "raw_score": 0.014886
+      },
+      {
+        "text": "sirekap",
+        "score": 0.4910959970925705,
+        "raw_score": 0.014363
+      },
+      {
+        "text": "mantap",
+        "score": 0.443019573230881,
+        "raw_score": 0.013437
+      },
+      {
+        "text": "login",
+        "score": 0.43222054929650583,
+        "raw_score": 0.013229
+      },
+      {
+        "text": "masuk",
+        "score": 0.42043507606043296,
+        "raw_score": 0.013002
+      },
+      {
+        "text": "emo_senang",
+        "score": 0.3945797206790924,
+        "raw_score": 0.012504
+      },
+      {
+        "text": "guna",
+        "score": 0.3602097502725715,
+        "raw_score": 0.011842
+      },
+      {
+        "text": "sangat bantu",
+        "score": 0.3282799439281449,
+        "raw_score": 0.011227
+      },
+      {
+        "text": "baik",
+        "score": 0.32521675925445204,
+        "raw_score": 0.011168
+      },
+      {
+        "text": "emo_lainnya",
+        "score": 0.297388505269716,
+        "raw_score": 0.010632
+      },
+      {
+        "text": "nya",
+        "score": 0.2572036758216084,
+        "raw_score": 0.009858
+      },
+      {
+        "text": "milu",
+        "score": 0.1866985099423706,
+        "raw_score": 0.0085
+      },
+      {
+        "text": "sukses",
+        "score": 0.18612740771507189,
+        "raw_score": 0.008489
+      },
+      {
+        "text": "buka",
+        "score": 0.15637817351124028,
+        "raw_score": 0.007916
+      },
+      {
+        "text": "update",
+        "score": 0.15523596905664294,
+        "raw_score": 0.007894
+      },
+      {
+        "text": "baru",
+        "score": 0.1496807019365557,
+        "raw_score": 0.007787
+      },
+      {
+        "text": "sekali",
+        "score": 0.14371008774206945,
+        "raw_score": 0.007672
+      },
+      {
+        "text": "kpps",
+        "score": 0.14339857743627016,
+        "raw_score": 0.007666
+      },
+      {
+        "text": "mohon",
+        "score": 0.10632885104615541,
+        "raw_score": 0.006952
+      },
+      {
+        "text": "lebih",
+        "score": 0.10259072737656401,
+        "raw_score": 0.00688
+      },
+      {
+        "text": "hari",
+        "score": 0.10118893100046723,
+        "raw_score": 0.006853
+      },
+      {
+        "text": "cepat",
+        "score": 0.09459529619438242,
+        "raw_score": 0.006726
+      },
+      {
+        "text": "versi",
+        "score": 0.08556149732620318,
+        "raw_score": 0.006552
+      },
+      {
+        "text": "terus",
+        "score": 0.0836405171071076,
+        "raw_score": 0.006515
+      },
+      {
+        "text": "belum",
+        "score": 0.08358859872280772,
+        "raw_score": 0.006514
+      },
+      {
+        "text": "semangat",
+        "score": 0.08042157728051504,
+        "raw_score": 0.006453
+      },
+      {
+        "text": "good",
+        "score": 0.07803333160272052,
+        "raw_score": 0.006407
+      },
+      {
+        "text": "susah",
+        "score": 0.0774622293754218,
+        "raw_score": 0.006396
+      },
+      {
+        "text": "kasih",
+        "score": 0.07471055500752813,
+        "raw_score": 0.006343
+      },
+      {
+        "text": "kendala",
+        "score": 0.06946679819324021,
+        "raw_score": 0.006242
+      },
+      {
+        "text": "tingkat",
+        "score": 0.06183479570115775,
+        "raw_score": 0.006095
+      },
+      {
+        "text": "apk",
+        "score": 0.06032916255646124,
+        "raw_score": 0.006066
+      },
+      {
+        "text": "emo_senang emo_senang",
+        "score": 0.046051606873994066,
+        "raw_score": 0.005791
+      },
+      {
+        "text": "kpu",
+        "score": 0.032189398265925956,
+        "raw_score": 0.005524
+      },
+      {
+        "text": "yg",
+        "score": 0.024972742848242545,
+        "raw_score": 0.005385
+      },
+      {
+        "text": "coba",
+        "score": 0.01988474118685425,
+        "raw_score": 0.005287
+      },
+      {
+        "text": "jadi",
+        "score": 0.018638699963657128,
+        "raw_score": 0.005263
+      },
+      {
+        "text": "gagal",
+        "score": 0.0156793520585639,
+        "raw_score": 0.005206
+      },
+      {
+        "text": "aplikasi sirekap",
+        "score": 0.007476247339182806,
+        "raw_score": 0.005048
+      },
+      {
+        "text": "lupa",
+        "score": 0.006437879653185191,
+        "raw_score": 0.005028
+      },
+      {
+        "text": "gak",
+        "score": 0.00513992004568814,
+        "raw_score": 0.005003
+      },
+      {
+        "text": "password",
+        "score": 0.002128653756295071,
+        "raw_score": 0.004945
+      },
+      {
+        "text": "aman",
+        "score": 0.0,
+        "raw_score": 0.004904
+      }
+    ],
+    "netral": [
+      {
+        "text": "login",
+        "score": 1.0,
+        "raw_score": 0.024715
+      },
+      {
+        "text": "tidak",
+        "score": 0.8071628366149289,
+        "raw_score": 0.021199
+      },
+      {
+        "text": "masuk",
+        "score": 0.7864860417923546,
+        "raw_score": 0.020822
+      },
+      {
+        "text": "aplikasi",
+        "score": 0.7182032578292108,
+        "raw_score": 0.019577
+      },
+      {
+        "text": "nya",
+        "score": 0.49355564087094833,
+        "raw_score": 0.015481
+      },
+      {
+        "text": "update",
+        "score": 0.45960620852300776,
+        "raw_score": 0.014862
+      },
+      {
+        "text": "susah",
+        "score": 0.433719080787583,
+        "raw_score": 0.01439
+      },
+      {
+        "text": "baik",
+        "score": 0.4119453737728295,
+        "raw_score": 0.013993
+      },
+      {
+        "text": "mohon",
+        "score": 0.4072286513464597,
+        "raw_score": 0.013907
+      },
+      {
+        "text": "versi",
+        "score": 0.39593045576701585,
+        "raw_score": 0.013701
+      },
+      {
+        "text": "belum",
+        "score": 0.35748368343114134,
+        "raw_score": 0.013
+      },
+      {
+        "text": "gagal",
+        "score": 0.31371688696319855,
+        "raw_score": 0.012202
+      },
+      {
+        "text": "sirekap",
+        "score": 0.3090001645368288,
+        "raw_score": 0.012116
+      },
+      {
+        "text": "guna",
+        "score": 0.30494158942576655,
+        "raw_score": 0.012042
+      },
+      {
+        "text": "terus",
+        "score": 0.22228925574507757,
+        "raw_score": 0.010535
+      },
+      {
+        "text": "password",
+        "score": 0.21016837602149951,
+        "raw_score": 0.010314
+      },
+      {
+        "text": "hari",
+        "score": 0.19991224702462573,
+        "raw_score": 0.010127
+      },
+      {
+        "text": "yg",
+        "score": 0.18011298195579448,
+        "raw_score": 0.009766
+      },
+      {
+        "text": "min",
+        "score": 0.16184939395601386,
+        "raw_score": 0.009433
+      },
+      {
+        "text": "mudah",
+        "score": 0.15916195908517525,
+        "raw_score": 0.009384
+      },
+      {
+        "text": "baru",
+        "score": 0.1510996544726595,
+        "raw_score": 0.009237
+      },
+      {
+        "text": "banyak",
+        "score": 0.14939944057478202,
+        "raw_score": 0.009206
+      },
+      {
+        "text": "jadi",
+        "score": 0.14040476059891405,
+        "raw_score": 0.009042
+      },
+      {
+        "text": "gak",
+        "score": 0.13854000987220977,
+        "raw_score": 0.009008
+      },
+      {
+        "text": "lama",
+        "score": 0.12565129161410626,
+        "raw_score": 0.008773
+      },
+      {
+        "text": "apk",
+        "score": 0.11018482970438219,
+        "raw_score": 0.008491
+      },
+      {
+        "text": "solusi",
+        "score": 0.09614435364449073,
+        "raw_score": 0.008235
+      },
+      {
+        "text": "log",
+        "score": 0.09246969780069106,
+        "raw_score": 0.008168
+      },
+      {
+        "text": "emo_lainnya",
+        "score": 0.08374924587286792,
+        "raw_score": 0.008009
+      },
+      {
+        "text": "bagus",
+        "score": 0.07661931662370432,
+        "raw_score": 0.007879
+      },
+      {
+        "text": "error",
+        "score": 0.06235945812537706,
+        "raw_score": 0.007619
+      },
+      {
+        "text": "padahal",
+        "score": 0.05939779520649371,
+        "raw_score": 0.007565
+      },
+      {
+        "text": "udah",
+        "score": 0.05511983765699555,
+        "raw_score": 0.007487
+      },
+      {
+        "text": "eror",
+        "score": 0.04985465913453629,
+        "raw_score": 0.007391
+      },
+      {
+        "text": "username",
+        "score": 0.04870290133274831,
+        "raw_score": 0.00737
+      },
+      {
+        "text": "kurang",
+        "score": 0.04453463500246806,
+        "raw_score": 0.007294
+      },
+      {
+        "text": "sulit",
+        "score": 0.0425053474469369,
+        "raw_score": 0.007257
+      },
+      {
+        "text": "dulu",
+        "score": 0.03543026380738221,
+        "raw_score": 0.007128
+      },
+      {
+        "text": "foto",
+        "score": 0.034168814786376366,
+        "raw_score": 0.007105
+      },
+      {
+        "text": "ga",
+        "score": 0.028629408215872315,
+        "raw_score": 0.007004
+      },
+      {
+        "text": "coba",
+        "score": 0.028135797729391787,
+        "raw_score": 0.006995
+      },
+      {
+        "text": "mau",
+        "score": 0.022925464816541435,
+        "raw_score": 0.0069
+      },
+      {
+        "text": "bagaimana",
+        "score": 0.013985630450282456,
+        "raw_score": 0.006737
+      },
+      {
+        "text": "lebih",
+        "score": 0.007513848516426259,
+        "raw_score": 0.006619
+      },
+      {
+        "text": "kendala",
+        "score": 0.005978171447375623,
+        "raw_score": 0.006591
+      },
+      {
+        "text": "lancar",
+        "score": 0.005265178522459263,
+        "raw_score": 0.006578
+      },
+      {
+        "text": "lupa",
+        "score": 0.0023583612131849122,
+        "raw_score": 0.006525
+      },
+      {
+        "text": "kasih",
+        "score": 0.0019195963363132951,
+        "raw_score": 0.006517
+      },
+      {
+        "text": "salah",
+        "score": 0.0008226841441342761,
+        "raw_score": 0.006497
+      },
+      {
+        "text": "milu",
+        "score": 0.0,
+        "raw_score": 0.006482
+      }
+    ],
+    "negatif": [
+      {
+        "text": "aplikasi",
+        "score": 1.0,
+        "raw_score": 0.038412
+      },
+      {
+        "text": "login",
+        "score": 0.4449527294906984,
+        "raw_score": 0.020212
+      },
+      {
+        "text": "tidak",
+        "score": 0.4382738639829216,
+        "raw_score": 0.019993
+      },
+      {
+        "text": "apk",
+        "score": 0.26306800853918877,
+        "raw_score": 0.014248
+      },
+      {
+        "text": "susah",
+        "score": 0.24608112229338214,
+        "raw_score": 0.013691
+      },
+      {
+        "text": "nya",
+        "score": 0.22101250381213786,
+        "raw_score": 0.012869
+      },
+      {
+        "text": "gak",
+        "score": 0.21967063129002742,
+        "raw_score": 0.012825
+      },
+      {
+        "text": "belum",
+        "score": 0.21335773101555353,
+        "raw_score": 0.012618
+      },
+      {
+        "text": "masuk",
+        "score": 0.20265324794144557,
+        "raw_score": 0.012267
+      },
+      {
+        "text": "guna",
+        "score": 0.19701128392802686,
+        "raw_score": 0.012082
+      },
+      {
+        "text": "malah",
+        "score": 0.1933516315949985,
+        "raw_score": 0.011962
+      },
+      {
+        "text": "sulit",
+        "score": 0.15815797499237572,
+        "raw_score": 0.010808
+      },
+      {
+        "text": "siap",
+        "score": 0.14720951509606586,
+        "raw_score": 0.010449
+      },
+      {
+        "text": "baik",
+        "score": 0.14708752668496491,
+        "raw_score": 0.010445
+      },
+      {
+        "text": "buat",
+        "score": 0.14620311070448305,
+        "raw_score": 0.010416
+      },
+      {
+        "text": "ga",
+        "score": 0.14571515706007926,
+        "raw_score": 0.0104
+      },
+      {
+        "text": "terus",
+        "score": 0.14342787435193657,
+        "raw_score": 0.010325
+      },
+      {
+        "text": "aja",
+        "score": 0.14315340042695945,
+        "raw_score": 0.010316
+      },
+      {
+        "text": "gagal",
+        "score": 0.13565111314425132,
+        "raw_score": 0.01007
+      },
+      {
+        "text": "yg",
+        "score": 0.13409576090271424,
+        "raw_score": 0.010019
+      },
+      {
+        "text": "hari",
+        "score": 0.13101555352241537,
+        "raw_score": 0.009918
+      },
+      {
+        "text": "banyak",
+        "score": 0.12525160109789568,
+        "raw_score": 0.009729
+      },
+      {
+        "text": "emo_lainnya",
+        "score": 0.1251906068923452,
+        "raw_score": 0.009727
+      },
+      {
+        "text": "bikin",
+        "score": 0.10838670326319,
+        "raw_score": 0.009176
+      },
+      {
+        "text": "sangat",
+        "score": 0.09460201280878318,
+        "raw_score": 0.008724
+      },
+      {
+        "text": "mau",
+        "score": 0.07328453796889292,
+        "raw_score": 0.008025
+      },
+      {
+        "text": "update",
+        "score": 0.0727355901189387,
+        "raw_score": 0.008007
+      },
+      {
+        "text": "milu",
+        "score": 0.0662092101250381,
+        "raw_score": 0.007793
+      },
+      {
+        "text": "mudah",
+        "score": 0.06401341872522111,
+        "raw_score": 0.007721
+      },
+      {
+        "text": "eror",
+        "score": 0.05745654162854527,
+        "raw_score": 0.007506
+      },
+      {
+        "text": "sirekap",
+        "score": 0.053705397987191206,
+        "raw_score": 0.007383
+      },
+      {
+        "text": "udah",
+        "score": 0.05324794144556268,
+        "raw_score": 0.007368
+      },
+      {
+        "text": "error",
+        "score": 0.04062214089661482,
+        "raw_score": 0.006954
+      },
+      {
+        "text": "buka",
+        "score": 0.04004269594388533,
+        "raw_score": 0.006935
+      },
+      {
+        "text": "jadi",
+        "score": 0.038944800243976806,
+        "raw_score": 0.006899
+      },
+      {
+        "text": "padahal",
+        "score": 0.03525465080817322,
+        "raw_score": 0.006778
+      },
+      {
+        "text": "pakai",
+        "score": 0.03394327538883804,
+        "raw_score": 0.006735
+      },
+      {
+        "text": "apa",
+        "score": 0.029551692589204006,
+        "raw_score": 0.006591
+      },
+      {
+        "text": "server",
+        "score": 0.02717291857273557,
+        "raw_score": 0.006513
+      },
+      {
+        "text": "belum siap",
+        "score": 0.021378469045440662,
+        "raw_score": 0.006323
+      },
+      {
+        "text": "kpps",
+        "score": 0.02067703568161024,
+        "raw_score": 0.0063
+      },
+      {
+        "text": "bukan",
+        "score": 0.01957913998170172,
+        "raw_score": 0.006264
+      },
+      {
+        "text": "kerja",
+        "score": 0.018542238487343703,
+        "raw_score": 0.00623
+      },
+      {
+        "text": "kpu",
+        "score": 0.014242146996035362,
+        "raw_score": 0.006089
+      },
+      {
+        "text": "gk",
+        "score": 0.010064043915827983,
+        "raw_score": 0.005952
+      },
+      {
+        "text": "buruk",
+        "score": 0.004727050930161627,
+        "raw_score": 0.005777
+      },
+      {
+        "text": "sama",
+        "score": 0.00445257700518449,
+        "raw_score": 0.005768
+      },
+      {
+        "text": "pas",
+        "score": 0.004330588594083555,
+        "raw_score": 0.005764
+      },
+      {
+        "text": "lama",
+        "score": 0.0010673985971332554,
+        "raw_score": 0.005657
+      },
+      {
+        "text": "kalau",
+        "score": 0.0,
+        "raw_score": 0.005622
+      }
+    ]
+  }
+}

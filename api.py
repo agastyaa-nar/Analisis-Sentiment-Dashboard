@@ -26,8 +26,10 @@ class PredictRequest(BaseModel):
 
 
 # === Load model & TF-IDF ===
-tfidf = joblib.load("artifacts/tfidf_vectorizer.pkl")
-nb_model = joblib.load("artifacts/naive_bayes_optimized.pkl")
+# Path relatif dari lokasi api.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+tfidf = joblib.load(os.path.join(BASE_DIR, "artifacts", "tfidf_vectorizer.pkl"))
+nb_model = joblib.load(os.path.join(BASE_DIR, "artifacts", "naive_bayes_optimized.pkl"))
 
 print("API classes:", nb_model.classes_)
 print("API tfidf vocab size:", len(tfidf.vocabulary_))
