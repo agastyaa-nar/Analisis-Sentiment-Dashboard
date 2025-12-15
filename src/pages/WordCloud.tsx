@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import ReactWordcloud from "react-wordcloud";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
-import stats from "../../../artifacts/wordcloud.json";
+import stats from "../../artifacts/wordcloud.json";
 
 type SentimentKey = "positif" | "netral" | "negatif";
 
@@ -177,11 +177,11 @@ const WordCloudPage = () => {
             </div>
           </Card>
 
-<<<<<<< HEAD
           {/* NEGATIF */}
-=======
-          {/* Negative Word Cloud */}
-          {/* NEGATIF */}
+          <Card className="w-full p-8 rounded-3xl border-none shadow-soft bg-gradient-to-br from-card via-card to-destructive/10 hover:shadow-glow transition-all duration-500 animate-slide-up group overflow-hidden relative" style={{ animationDelay: "0.2s" }}>
+            <div className="absolute inset-0 bg-destructive/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-destructive/20 rounded-full blur-3xl" />
+            <div className="relative">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-gradient-to-r from-destructive to-destructive/70 animate-pulse" />
@@ -203,12 +203,12 @@ const WordCloudPage = () => {
         <Card className="mt-6 p-6 rounded-3xl border-none shadow-soft bg-card">
           <h3 className="text-lg font-semibold text-foreground mb-4">Tentang Word Cloud</h3>
           <p className="text-muted-foreground text-sm leading-relaxed">
-<<<<<<< HEAD
             Word cloud menampilkan kata-kata yang paling sering muncul dalam ulasan. Ukuran teks menunjukkan bobot relatif berdasarkan skor TF-IDF. Data pada visualisasi ini diambil langsung dari hasil analisis pada notebook (wordcloud.json), sehingga konsisten dengan laporan analitik.
-=======
-            Word cloud menampilkan kata-kata yang paling sering muncul dalam ulasan. Ukuran teks menunjukkan frekuensi kemunculan kata tersebut. Hover pada kata untuk melihat detail frekuensinya. Kata-kata ini memberikan gambaran cepat tentang topik atau masalah utama yang dibahas pengguna dalam setiap kategori sentimen.
->>>>>>> 61930dfbbf2596570948e69927ef8403a43983bf
           </p>
         </Card>
       </main>
-            Word cloud menampilkan kata-kata yang paling sering muncul dalam ulasan. Ukuran teks menunjukkan bobot relatif berdasarkan skor TF-IDF. Data pada visualisasi ini diambil langsung dari hasil analisis pada notebook (wordcloud.json), sehingga konsisten dengan laporan analitik.
+    </div>
+  );
+};
+
+export default WordCloudPage;
